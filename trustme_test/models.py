@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class OpinionModel(models.Model):
+    pass
+
+
+class RfcModel(models.Model):
+    pass
+
+
 class UserModel(models.Model):
     username = models.CharField(max_length=50)
     name = models.CharField(max_length=30)
@@ -16,5 +24,9 @@ class UserModel(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class PageModel(models.Model):
+    pass
 
 # Create your models here.
