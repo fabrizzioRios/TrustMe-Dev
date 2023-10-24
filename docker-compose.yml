@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=trustme_admin
+      - POSTGRES_PASSWORD=tr19stm2proj2ct
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
