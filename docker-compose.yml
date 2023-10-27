@@ -1,14 +1,10 @@
-version: '3.8'
+version: '3.1'
 services:
+
   db:
-    image: postgres:14.1-alpine
+    image: mariadb
     restart: always
     environment:
-      - POSTGRES_USER=trustme_admin
-      - POSTGRES_PASSWORD=tr19stm2proj2ct
+      MARIADB_ROOT_USER: root
     ports:
-      - '5432:5432'
-    volumes:
-      - db:/var/lib/postgresql/data
-volumes:
-  db:
+      - 3306:3306
