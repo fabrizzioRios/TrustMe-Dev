@@ -1,8 +1,8 @@
-from trustme_test.models import UserModel
+from trustme_test.models import Usuarios
 from rest_framework.serializers import ModelSerializer
 
 
 class UserSerializer(ModelSerializer):
     class Meta:
-        model = UserModel
-        fields = '__All__'
+        model = Usuarios
+        fields = '__all__'

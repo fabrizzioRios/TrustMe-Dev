@@ -1,0 +1,3 @@
+1|OUGP020425FR5|RFC válido, y susceptible de recibir facturas
+2|GUMS010924H46|RFC válido, y susceptible de recibir facturas
+3|ZPRS020421FS6|RFC no registrado en el padrón de contribuyentes
