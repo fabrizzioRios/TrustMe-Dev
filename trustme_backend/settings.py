@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'trustme_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'trustme_admin',
-        'PASSWORD': 'tr19stm2proj2ct',
+        'NAME': 'DB_Escuela',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '5432'
+        'PORT': '3306'
     }
 }
 
