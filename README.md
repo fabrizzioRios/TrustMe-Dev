@@ -9,7 +9,7 @@
 ## Build
 ### Cloning the repository
 
-In your favourite IDE, clone the repository using `git clone https://github.com/fabrizzioRios/TrustMe-Dev/r`
+In your favourite IDE, clone the repository using `git clone https://github.com/fabrizzioRios/TrustMe-Dev/`
 This is will give you access to the project folders, the docker-compose archive and the requirements.txt archive in order to set-up the project in your local computer.
 
 ### Running Postgresql
