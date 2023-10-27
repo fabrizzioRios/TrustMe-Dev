@@ -61,6 +61,10 @@ class Rfc(models.Model):
 
 
 class Usuarios(models.Model):
+    REQUIRED_FIELDS = ['nombre']
+    USERNAME_FIELD = 'correo'
+    is_anonymous = True
+    is_authenticated = False
     id_usuario = models.AutoField(db_column='Id_Usuario', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(db_column='Nombre', max_length=150, blank=True, null=True)  # Field name made lowercase.
     correo = models.CharField(db_column='Correo', max_length=50, blank=True, null=True)  # Field name made lowercase.
