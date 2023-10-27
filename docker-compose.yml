@@ -1,10 +1,17 @@
-version: '3.1'
+version: '3.8'
 services:
 
-  db:
-    image: mariadb
-    restart: always
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: unless-stopped
     environment:
-      MARIADB_ROOT_USER: root
+      MARIADB_ROOT_PASSWORD: 'root'
+      MARIADB_DATABASE: 'trustme'  # Cambia 'mydb' al nombre de tu base de datos
+      MARIADB_USER: 'root'     # Cambia 'myuser' a tu nombre de usuario de la base de datos
+      MARIADB_PASSWORD: 'root'
     ports:
-      - 3306:3306
+      - '3306:3306'
+    volumes:
+      - /home/frios18/Desktop/TrustMe-Dev/trust_Me_data:/var/lib/mysql
+
