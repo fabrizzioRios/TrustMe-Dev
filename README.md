@@ -9,7 +9,7 @@
 ## Build
 ### Cloning the repository
 
-In your favourite IDE, clone the repository using `git clone https://github.com/fabrizzioRios/TrustMe-Dev/edit/master`
+In your favourite IDE, clone the repository using `git clone https://github.com/fabrizzioRios/TrustMe-Dev/r`
 This is will give you access to the project folders, the docker-compose archive and the requirements.txt archive in order to set-up the project in your local computer.
 
 ### Running Postgresql
@@ -23,8 +23,8 @@ To run the Postgres DB you only need to have the project already cloned in your 
 
 You should execute
 
-`docker-compose build`
-`docker-compose up`
+`docker compose build`
+`docker compose up`
 
 
 ### Enviroment and install requirements
