@@ -1,4 +1,4 @@
-# Admom Final Project
+# Trust-me Project
 
 - Back-End side of the Trust-Me project.
 
