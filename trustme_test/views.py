@@ -7,12 +7,13 @@ from trustme_test.serializer import UserSerializer
 
 class UserView(APIView):
     def get(self, request):
-        user = User.objects.all()
+        user = UserModel.objects.all()
         user_serializer = UserSerializer(user, many=True)
         return Response(user_serializer.data)
 
     def post(self, request, pk):
         user_serializer = UserSerializer(data=request.data)
+
         if user_serializer.is_valid():
             user_serializer.save()
             return Response(user_serializer.data, status=status.HTTP_201_CREATED)
@@ -23,15 +24,15 @@ class UserView(APIView):
 class UserDetailView(APIView):
     def get(self, request, pk):
         try:
-            account = User.objects.get(pk=pk)
-        except User.DoesNotExist:
+            account = UserModel.objects.get(pk=pk)
+        except UserModel.DoesNotExist:
             return Response({'Error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = UserSerializer(account)
         return Response(serializer.data)
 
     def put(self, request, pk):
-        user = User.objects.get(pk=pk)
+        user = UserModel.objects.get(pk=pk)
         user_serializer = UserSerializer(user, data=request.data)
         if user_serializer.is_valid():
             user_serializer.save()
@@ -40,6 +41,6 @@ class UserDetailView(APIView):
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        account = User.objects.get(pk=pk)
+        account = UserModel.objects.get(pk=pk)
         account.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
