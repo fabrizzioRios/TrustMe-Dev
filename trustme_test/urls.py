@@ -21,5 +21,5 @@ urlpatterns = [
     path('opinions/<int:pk>/', OpinionViewDetail.as_view(), name="opinion-detail"),
 
     path('rfcs/', RfcView.as_view(), name='rfc'),
-    path('rfcs/<int:pk>', RfcDetailView.as_view(), name='rfc-detail'),
+    path('rfcs/<str:rfc_complete>', RfcDetailView.as_view(), name='rfc-detail'),
 ]

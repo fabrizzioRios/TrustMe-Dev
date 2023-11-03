@@ -67,7 +67,7 @@ class Usuarios(models.Model):
     is_authenticated = False
     id_usuario = models.AutoField(db_column='Id_Usuario', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(db_column='Nombre', max_length=150, blank=True, null=True)  # Field name made lowercase.
-    correo = models.CharField(db_column='Correo', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    correo = models.CharField(db_column='Correo', max_length=50, blank=True, null=True, unique=True)  # Field name made lowercase.
     contraseña = models.CharField(db_column='Contraseña', max_length=30, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:

@@ -11,6 +11,7 @@ class OpinionSerializer(ModelSerializer):
 
 
 class PageSerializer(ModelSerializer):
+    opinions = OpinionSerializer()
     class Meta:
         model = Pagina
         fields = '__all__'
@@ -23,11 +24,12 @@ class RfcSerializer(ModelSerializer):
 
 
 class UserSerializer(ModelSerializer):
+    rfc = RfcSerializer()
     class Meta:
         model = Usuarios
         fields = '__all__'
 
-    nombre = serializers.CharField(required=True)
+
 
 
 class ValidationSerializer(ModelSerializer):

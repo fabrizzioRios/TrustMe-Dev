@@ -11,21 +11,20 @@ from auth.custom_auth import CustomAuthBackend
 
 class LoginView(APIView):
     def post(self, request):
-        serializer = LoginSerializer(data=request.data)
-        if serializer.is_valid():
-            email = serializer.validated_data['correo']
-            password = serializer.validated_data['contraseña']
-            # user = authenticate(request, username=email, password=password)
-            auth = CustomAuthBackend()
-            user = auth.authenticate(self, email, password)
-            print(user)
-            if user is not None:
-                print(login(request, user=user))
-                return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
+        print(request)
+        email = request.data['correo']
+        password = request.data['contraseña']
+        user = CustomAuthBackend.authenticate(correo=email, contraseña=password)
+        if user:
+            serializer = LoginSerializer(user)
+            if serializer and type(user) is not dict:
+                return Response({'id_usuario': user.id_usuario, 'correo': user.correo, 'contraseña': user.contraseña}, status=status.HTTP_200_OK)
+            elif type(user) is dict:
+                return Response({'id_usuario': user.get('id_usuario'), 'correo': user.get('email'), 'contraseña': user.get('password')}, status=status.HTTP_200_OK)
             else:
-                return Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Invalid credentials, Try again'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 """ Opinion views """
@@ -159,7 +158,7 @@ class ValidationDetailView(APIView):
         page.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-""" User related views """
+""" RFC related views """
 
 
 class RfcView(APIView):
@@ -170,7 +169,7 @@ class RfcView(APIView):
 
     def post(self, request):
         rfc_serializer = RfcSerializer(data=request.data)
-
+        
         if rfc_serializer.is_valid():
             rfc_serializer.save()
             return Response(rfc_serializer.data, status=status.HTTP_201_CREATED)
@@ -179,17 +178,17 @@ class RfcView(APIView):
 
 
 class RfcDetailView(APIView):
-    def get(self, request, pk):
+    def get(self, request, rfc_complete):
         try:
-            rfc = Rfc.objects.get(pk=pk)
+            rfc = Rfc.objects.get(rfc=rfc_complete)
         except Rfc.DoesNotExist:
             return Response({'Error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        serializer = UserSerializer(rfc)
+        serializer = RfcSerializer(rfc)
         return Response(serializer.data)
 
-    def put(self, request, pk):
-        rfc = Usuarios.objects.get(pk=pk)
+    def put(self, request, rfc_complete):
+        rfc = Rfc.objects.get(rfc=rfc_complete)
         rfc_serializer = RfcSerializer(rfc, data=request.data)
         if rfc_serializer.is_valid():
             rfc_serializer.save()
@@ -197,8 +196,8 @@ class RfcDetailView(APIView):
         else:
             return Response(rfc_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
-        rfc = Rfc.objects.get(pk=pk)
+    def delete(self, request, rfc_complete):
+        rfc = Rfc.objects.get(rfc=rfc_complete)
         rfc.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -216,8 +215,9 @@ class UserView(APIView):
         user_serializer = UserSerializer(data=request.data)
 
         if user_serializer.is_valid():
-            user_serializer.save()
-            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+            save_user = user_serializer.save()
+            print(save_user.id_usuario)
+            return Response(save_user.id_usuario, status=status.HTTP_201_CREATED)
         else:
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
