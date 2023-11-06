@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -40,7 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
-    'trustme_test'
+    'trustme_test',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -79,15 +81,10 @@ WSGI_APPLICATION = 'trustme_backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'trustme',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -131,34 +128,35 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication',
+#     ],
+# }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'trustme_test.Usuarios'
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # Other authentication classes
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-        # Other permission classes
-    ),
-}
-
-# Configure JWT settings
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Set token expiration time
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Set refresh token expiration
-    'ROTATE_REFRESH_TOKENS': False,                # Set to True for rotating tokens
-    'ALGORITHM': 'HS256',
-    # Other JWT settings
-}
+AUTH_USER_MODEL = 'trustme_test.User'
+#
+#
+#
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#         # Other authentication classes
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#         # Other permission classes
+#     ),
+# }
+#
+# # Configure JWT settings
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Set token expiration time
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Set refresh token expiration
+#     'ROTATE_REFRESH_TOKENS': False,                # Set to True for rotating tokens
+#     'ALGORITHM': 'HS256',
+#     # Other JWT settings
+# }
 CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:5173',]
