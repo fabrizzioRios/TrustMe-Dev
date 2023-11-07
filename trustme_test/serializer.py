@@ -1,4 +1,3 @@
-
 from rest_framework.serializers import ModelSerializer
 from trustme_test.models import Opinion, Page, User
 
@@ -18,16 +17,18 @@ class PageSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        opinions = Opinion.objects.filter(page=instance.id)
+        opinions = Opinion.objects.filter(user__opinion__page_id=instance.id)
         serialized_opinions = OpinionSerializer(opinions, many=True).data
         data['opinions'] = serialized_opinions
         return data
 
 
 class UserSerializer(ModelSerializer):
+    opinions = OpinionSerializer(many=True, required=False)
+
     class Meta:
         model = User
-        exclude = ('password', 'last_login')
+        exclude = ('last_login',)
 
 
 class LoginSerializer(ModelSerializer):

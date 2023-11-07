@@ -3,10 +3,12 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Opinion(models.Model):
+    title = models.CharField(max_length=50, blank=True, null=True)
     descripcion = models.CharField(max_length=350, blank=True, null=True)
     rating = models.IntegerField(default=0, blank=True, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
+    page_id = models.ForeignKey("trustme_test.Page", on_delete=models.CASCADE, blank=True, null=True)
     user = models.ForeignKey("trustme_test.User", on_delete=models.DO_NOTHING, blank=True, null=True)
 
 
@@ -37,7 +39,6 @@ class Page(models.Model):
     status = models.BooleanField(default=False)
     created_by = models.ForeignKey("trustme_test.User", blank=True, null=True, related_name="pages",
                                    on_delete=models.DO_NOTHING)
-    opinions = models.ManyToManyField(Opinion)
 
 
 class User(AbstractUser):
