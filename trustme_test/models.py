@@ -37,6 +37,7 @@ class Page(models.Model):
     update_date = models.DateField(auto_now=True)
     expiration_date = models.DateField(blank=True, null=True)
     status = models.BooleanField(default=False)
+    admin_authenticated = models.BooleanField(default=False)
     created_by = models.ForeignKey("trustme_test.User", blank=True, null=True, related_name="pages",
                                    on_delete=models.DO_NOTHING)
 

@@ -9,7 +9,7 @@ class OpinionSerializer(ModelSerializer):
 
 
 class PageSerializer(ModelSerializer):
-    opinions = OpinionSerializer(many=True, required=False)
+    opinions = OpinionSerializer(many=False, required=False)
 
     class Meta:
         model = Page
@@ -17,7 +17,7 @@ class PageSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        opinions = Opinion.objects.filter(user__opinion__page_id=instance.id)
+        opinions = Opinion.objects.filter(page_id=instance.id)
         serialized_opinions = OpinionSerializer(opinions, many=True).data
         data['opinions'] = serialized_opinions
         return data
