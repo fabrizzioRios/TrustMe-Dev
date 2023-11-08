@@ -40,9 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'rest_framework_simplejwt',
     'trustme_test',
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -128,35 +126,9 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.TokenAuthentication',
-#     ],
-# }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'trustme_test.User'
-#
-#
-#
-# REST_FRAMEWORK = {
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#         # Other authentication classes
-#     ),
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticated',
-#         # Other permission classes
-#     ),
-# }
-#
-# # Configure JWT settings
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Set token expiration time
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    # Set refresh token expiration
-#     'ROTATE_REFRESH_TOKENS': False,                # Set to True for rotating tokens
-#     'ALGORITHM': 'HS256',
-#     # Other JWT settings
-# }
+
 CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:5173',]
